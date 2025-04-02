@@ -25,3 +25,167 @@
 #container a {
   text-decoration: none;
 }
+
+.greetings-wrapper {
+  background-image: url('https://img.freepik.com/premium-photo/dark-room-with-plants-wall-with-sign-that-says-no-it_993259-8469.jpg');
+  background-size: cover;  /* Ensures image covers the div */
+  background-position: center;  /* Centers the image */
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  color: white;
+  padding: 10px;
+}
+
+ion-searchbar {
+  --background: white;   /* Background color */
+  --color: black;        /* Text color */
+  --placeholder-color: gray; /* Placeholder text color */
+  --icon-color: black;   /* Search icon color */
+  --border-radius: 50px;   /* Optional: Rounded corners */
+}
+
+.search-container {
+  background: transparent;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+.greeting{
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.d-block{
+  padding: 12px;
+  display: block;
+}
+
+ion-card {
+  width: 250px;
+  text-align: center;
+}
+
+ion-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+// TOP ROOMS 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive */
+  gap: 15px;
+  padding: 20px;
+}
+
+.grid-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.grid-item:hover {
+  transform: scale(1.05);
+}
+
+.room-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-bottom: 2px solid #ddd;
+}
+
+.room-info {
+  padding: 15px;
+}
+
+.room-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.room-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+
+
+
+//CATEGORY CARDS
+.category-grid {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.category-card {
+  width: 30%;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.category-text {
+  padding: 10px;
+  font-weight: bold;
+  background: #f8f8f8;
+}
+
+
+
+.text-bold{
+  font-weight: bold !important;
+}
+
+
+.status-occupied{
+  color: red !important;
+  font-weight: bold;
+}
+
+.status-available{
+  color: rgb(6, 145, 40) !important;
+  font-weight: bold;
+}
+
+
+// RATINGS
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  justify-content: flex-start; /* Align to start */
+}
+
+
+.stars {
+  color: #f4c430; // Gold color for stars
+
+  display: flex;
+  gap: 2px;
+
+}

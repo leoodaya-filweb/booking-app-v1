@@ -1,0 +1,89 @@
+.text-bold{
+  font-weight: bold !important;
+}
+
+.status-booked{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background-color: rgb(76, 109, 255);
+  color: white;
+  border-radius: 15px;
+}
+
+.status-completed{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background-color: rgb(25, 248, 118);
+  color: white;
+  border-radius: 12px;
+}
+
+.status-cancelled{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background-color: rgb(255, 76, 76);
+  color: white;
+  border-radius: 12px;
+}
+
+ion-list {
+  margin: 5px;
+  padding: 0;
+}
+
+ion-card {
+  margin: 10px 5px; /* Adjust as needed */
+  padding: 5px;
+}
+
+
+ion-item {
+  --inner-padding-end: 0px; /* Remove unnecessary padding inside ion-item */
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns button to the right */
+  padding: 10px 0; /* Adds spacing */
+}
+
+ion-button {
+  margin: 0;
+  padding:0; /* Adjust button padding */
+  --border-radius: 8px;
+  font-size: 12px;
+}
+
+
+
+ion-modal {
+  --height: 50%;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+ion-modal::part(backdrop) {
+  background: rgba(209, 213, 219);
+  opacity: 1;
+}
+
+ion-modal ion-toolbar {
+  --background: rgb(14 116 144);
+  --color: white;
+}

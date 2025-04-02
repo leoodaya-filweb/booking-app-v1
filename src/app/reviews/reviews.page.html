@@ -1,0 +1,77 @@
+<ion-header [translucent]="true" color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ratings & Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Header -->
+  <div class="icon-content">
+    <div class="ratings-wrapper">
+      <div class="icon-wrapper">
+        <ion-icon slot="start" name="star" size="medium" class="star-icon"></ion-icon>
+        <div class="icon-text-wrapper">
+          <h5 class="m-0">{{ (reviews?.average_rating | number: '1.1-2') ?? 0 }}</h5>
+          <p class="p-m-0"><span class="icon-title">Star</span></p>
+        </div>
+      </div>
+
+      <div class="icon-wrapper">
+        <ion-icon slot="start" name="people" size="medium" class="people-icon"></ion-icon>
+        <div class="icon-text-wrapper">
+          <h5 class="m-0">{{ reviews?.total_reviews ?? 0 }}</h5>
+          <p class="p-m-0"><span class="icon-title">Ratings</span></p>
+        </div>
+      </div>
+
+      <div class="icon-wrapper">
+        <ion-icon slot="start" name="people" size="medium" class="people-icon"></ion-icon>
+        <div class="icon-text-wrapper">
+          <h5 class="m-0">{{ (reviews?.average_rating| number: '1.1-2') ?? 0 }}</h5>
+          <p class="p-m-0"><span class="icon-title">Review</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews List -->
+  <div class="reviews">
+    <div *ngIf="reviews?.reviews?.length > 0; else noReviews">
+      <div *ngFor="let review of reviews.reviews" class="review-card">
+        <div class="review-card-header">
+          <div style="display: flex; gap: 7px; justify-content: flex-start; align-items: center;">
+            <ion-avatar>
+              <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
+            </ion-avatar>
+            <div class="p-m-0">
+              <h5 class="p-m-0 text-bold">{{ review?.user.name | titlecase }}</h5>
+              <div class="m-0" slot="start" class="d-flex-gap-1">
+                <ion-icon *ngFor="let star of getStarsArray(review.rating)" [name]="star" class="star"></ion-icon>
+              </div>
+            </div>
+          </div>
+          <div class="comment">
+            {{ review.comment }}
+          </div>
+        </div>
+        <div>
+          <ion-note class="review-date">{{ review.created_at | date:'mediumDate' }}</ion-note>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Reviews Found -->
+    <ng-template #noReviews>
+      <div class="no-reviews">
+        <ion-icon name="chatbubble-ellipses-outline" size="large"></ion-icon>
+        <p>No reviews available</p>
+      </div>
+    </ng-template>
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,41 @@
+.review-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.rating-container {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.stars ion-icon {
+  font-size: 28px;
+  color: #f4c542;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.stars ion-icon:hover {
+  transform: scale(1.2);
+}
+
+.modern-button {
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  color: white;
+  font-weight: bold;
+}
+
+
+ion-textarea{
+  border-radius: 8px;
+  border: 1px solid #424ef4;
+  padding: 10px;
+
+}

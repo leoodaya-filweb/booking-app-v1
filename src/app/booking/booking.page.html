@@ -1,0 +1,143 @@
+<ion-header [translucent]="true"  color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Bookings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+   
+  <!-- Active Booking Section -->
+  <ion-list-header>
+    <h3 class="text-bold">Active Bookings</h3>
+  </ion-list-header>
+
+  <ion-list inset="false">
+    <ion-card class="ion-padding-top" *ngFor="let booking of activeBookings" (click)="viewBooking(booking)">
+      <ion-card-content>
+        <div class="d-flex">
+          <h6 class="text-bold">Booking No. {{ booking.id }}</h6>
+          <p class="status-booked">{{ booking.status | titlecase }}</p>
+        </div>
+        
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="booking.room.image" alt="Room Image"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h2 class="text-bold">{{ booking.room.name }}</h2>
+            <p class="text-bold">Paid: ₱ {{ booking.price | number : '1.2-2' }}</p>
+            <div class="d-flex">
+              <p class="text-bold">Checkin</p>
+              <p class="text-bold">Checkout</p>
+            </div>
+            <div class="d-flex">
+              <p>{{ booking.checkin | date:'MMM d, y' }}</p>
+              <p>{{ booking.checkout | date:'MMM d, y' }}</p>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  
+    
+  <!-- No active bookings -->
+  <ion-item *ngIf="activeBookings.length === 0">
+    <ion-label>No active bookings found.</ion-label>
+  </ion-item>
+
+
+  <!-- Past Booking Section -->
+  <ion-list-header>
+    <h3 class="text-bold">Past Bookings</h3>
+  </ion-list-header>
+
+  <ion-list inset="false" lines="full" >
+    <ion-card *ngFor="let booking of pastBookings"   >
+      <ion-card-content>
+        <div class="d-flex">
+          <h6 class="text-bold">Booking No. {{ booking.id }}</h6>
+          <p *ngIf="booking.status == 'cancelled'" class="status-cancelled">
+            {{ booking.status | titlecase }}
+          </p>
+          <p *ngIf="booking.status == 'completed'" class="status-completed">
+            {{ booking.status | titlecase }}
+          </p>
+        </div>
+  
+        <ion-item  (click)="viewBooking(booking)" >
+          <ion-thumbnail slot="start">
+            <ion-img [src]="booking.room.image" alt="Room Image"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h2 class="text-bold">{{ booking.room.name }}</h2>
+            <p class="text-bold">Paid: ₱ {{ booking.price | number : '1.2-2' }}</p>
+            <div class="d-flex">
+              <p class="text-bold">Checkin</p>
+              <p class="text-bold">Checkout</p>
+            </div>
+            <div class="d-flex">
+              <p>{{ booking.checkin | date:'MMM d, y' }}</p>
+              <p>{{ booking.checkout | date:'MMM d, y' }}</p>
+            </div>
+          </ion-label>
+          
+        </ion-item>
+  
+        <!-- Button Wrapper to Align Button at the End -->
+        <div class="d-flex-gap-2-right" slot="End">
+          <div class="button-container" *ngIf="booking.is_reviewed == 0 && booking.status === 'completed'" >
+            <ion-button fill="clear" color="dark" id="open-modal" routerLink="/review-room/{{booking.id}}">Leave a review</ion-button>
+          </div>
+
+          <div class="button-container">
+            <ion-button  color="primary" expand="block" routerLink="/room-details/{{booking.room_id}}">Book Again</ion-button>
+          </div>
+       </div>
+
+       <!-- <div class="button-container" *ngIf="booking.is_reviewed != 1 ">
+        <ion-button color="primary" expand="block" routerLink="/room-details/{{booking.room_id}}">Book Again</ion-button>
+      </div> -->
+  
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  
+  
+  
+  <!-- No active bookings -->
+  <ion-item *ngIf="pastBookings.length === 0">
+    <ion-label>No past bookings found.</ion-label>
+  </ion-item>
+
+
+  <!-- <ion-modal [isOpen]="isModalOpen">
+   
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-label position="floating">Your Review</ion-label>
+        <ion-textarea [(ngModel)]="reviewText"></ion-textarea>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Rating</ion-label>
+        <ion-select [(ngModel)]="rating">
+          <ion-select-option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">{{ r }} Stars</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-button expand="block" (click)="submitReview()">Submit</ion-button>
+    </ion-content>
+  </ion-modal> -->
+  
+  
+
+  
+
+
+
+</ion-content>

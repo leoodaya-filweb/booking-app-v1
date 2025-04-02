@@ -1,0 +1,90 @@
+.star-icon{
+  padding: 15px;
+  background-color: antiquewhite;
+  border-radius: 50px;
+  font-size: 15px;
+  color: #f4c430; // Gold color for stars
+  border-color: #ce9e0d;
+  border-width: 15px;
+} 
+
+
+.ratings-wrapper{
+  background-color: aliceblue;
+  border-radius: 15px;
+  display: flex; 
+  gap:80px; 
+  justify-content: center; 
+  align-items: center; 
+  align-content: center; 
+    text-align: center;
+  padding: 10px;
+}
+
+
+.people-icon{
+  padding: 15px;
+  background-color: rgb(184, 196, 230);
+  border-radius: 50px;
+  font-size: 15px;
+  color: #308cf4;
+}
+
+.icon-wrapper{
+  text-align: center; 
+  padding: 10px;
+}
+
+.icon-text-wrapper{
+  margin: 0; padding-top: 5px;
+}
+
+
+.p-m-0{
+  padding: 0; margin: 0;
+}
+
+.icon-title{
+  font-size: 13px;
+}
+
+.star{
+  color: #f4c430; // Gold color for stars
+}
+
+.user-info{
+  display: flex; gap: 5px; justify-content: flex-start; align-items: center; align-content: center;
+}
+
+.reviews{
+  padding-top: 10px;
+}
+.comment{
+  padding-top: 10px;
+  padding: 10px;
+  text-align: justify;
+  font-size: 13px;
+}
+
+.review-card{
+  background-color: aliceblue;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+
+.review-date{
+  font-size: 12px;
+  padding: 10px;
+}
+
+.no-reviews {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+}
+
+.no-reviews ion-icon {
+  font-size: 50px;
+  color: #bbb;
+}

@@ -1,0 +1,62 @@
+<ion-header [translucent]="true" color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Rooms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <div class="greetings-wrapper">
+    <div class="d-block">
+        <div  class="text-center"   color="light">
+          <h3>Discover new rooms</h3>
+
+        </div>
+        <div class="search-container">
+          <ion-searchbar placeholder="Search for rooms" (ionInput)="filterRooms($event)"></ion-searchbar>
+
+        </div>
+        
+
+    </div>
+
+       <!-- Search Bar -->
+       
+  </div>
+
+
+  <ion-list>
+    <div class="grid-container" *ngIf="filteredRooms.length > 0">
+      <div class="grid-item" *ngFor="let room of filteredRooms" (click)="viewRoom(room)">
+        <img [src]="room.image_path" alt="{{ room.name }}" class="room-image"/>
+        <div class="room-info">
+          <div class="d-flex">
+            <h3 class="text-bold">{{ room.name }}</h3>
+            <p class="text-bold" color="primary">₱ {{ room.price | number : '1.2-2'}}/night</p>
+          </div>
+          <div class="rating-container">
+            <div class="stars">
+              <ion-icon *ngFor="let star of getStarsArray(room.average_rating)" [name]="star"></ion-icon>
+            </div>
+          </div>
+          <p>{{ (room.average_rating | number: '1.1-2') ?? 0 }} Rating ({{ room.total_reviews ?? 0 }} Reviews)</p>
+          <p *ngIf="room.status === 'occupied'">Status: <span class="status-occupied">{{ room.status | titlecase }}</span></p>
+          <p *ngIf="room.status === 'Available'">Status: <span class="status-available">{{ room.status | titlecase }}</span></p>
+        </div>
+      </div>
+    </div>
+  
+    <ion-item *ngIf="filteredRooms.length === 0">
+      <ion-label class="text-center">No rooms found.</ion-label>
+    </ion-item>
+  </ion-list>
+
+ 
+
+
+
+</ion-content>

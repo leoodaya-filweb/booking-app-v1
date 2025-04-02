@@ -1,2 +1,72 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+.text-center{
+  text-align: center;
+  margin-top: -8px;
+  font-weight: lighter;
+  color: rgb(85, 82, 82);
+}
+
+.text-bold{
+  font-weight: bolder !important;
+}
+
+.d-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.d-flex-gap-2{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+}
+
+.d-flex-gap-2-right{
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.d-flex-gap-1{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  text-align: center;
+}
+
+ion-button{
+  --border-radius: 15px;
+}
+
+.d-none{
+  display: none;
+}
+
+
+
+
+.space-between{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  margin: 5px;
+  align-items: center;
+}
+
+.space-between-no-paddding{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-0{
+  padding: 0;
+}
+
+.m-0{
+  margin: 0;
+}

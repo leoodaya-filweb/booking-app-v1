@@ -1,0 +1,133 @@
+<ion-header [translucent]="true" color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ room?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  <div *ngIf="room" class="room-container">
+    <!-- Room Image -->
+    <img [src]="room.image_path" alt="{{ room.name }}" class="room-image"/>
+
+    <!-- Ratings -->
+   
+    <!-- Room Details -->
+    <div class="room-info">
+      <div class="space-between-no-paddding">
+      
+        <ion-chip  >
+          <ion-icon name="wifi"></ion-icon> <span class="text-small">Free Wifi</span>
+        </ion-chip>
+        <ion-chip >
+          <ion-icon name="fast-food"></ion-icon> <span class="text-small">Free Breakfast</span>
+        </ion-chip> 
+
+        <ion-chip class="d-flex-gap-1" routerLink="/reviews/{{room.id}}">
+          <div class="stars">
+            <ion-icon *ngIf="room.average_rating > 0 "   name="star"></ion-icon>
+            <ion-icon  *ngIf="room.average_rating <= 0 "  name="star-outline"></ion-icon>
+          </div>
+          <br>
+          <span class="review-count"> {{room.average_rating | number: '1.1-2'}}</span>
+        </ion-chip>
+      </div>
+
+
+      <div class="room-header">
+        <h2>{{ room.name }}</h2>
+        <p class="room-price">₱{{ room.price | number : '1.2-2' }}/night</p>
+      </div>
+
+      <div class="room-meta ">
+        <ion-icon name="location" color="primary"></ion-icon> <span>San Antionio San Pedro Laguna</span>
+      </div>
+      <div class="room-meta ">
+        <ion-icon name="bed" color="primary"></ion-icon> <span>{{room.bed}} bed/s</span>
+      </div>
+      
+      <div class="room-meta " *ngIf="room.status == 'Available'">
+        <span>Available </span> <ion-icon name="checkmark-circle" color="success"></ion-icon> 
+      </div>
+      <div class="room-meta " *ngIf="room.status == 'occupied'">
+        <span>Available </span> <ion-icon name="close-circle" color="danger"></ion-icon> 
+      </div>
+      
+     
+
+     
+
+     <div class="">
+        <h5>Description</h5>
+        <ion-note>
+          {{ room.description ?? 'No description available' }}  
+        </ion-note>
+
+     </div>
+          <!-- Date Picker -->
+      <div class="date-picker">
+        <h5>Booking Date</h5>
+        <div class="space-between">
+          <label>Check-in</label>
+          <ion-datetime-button datetime="checkin"></ion-datetime-button>
+
+        </div>
+          <div class="space-between">
+            <label>Check-out</label>
+            <ion-datetime-button datetime="checkout"></ion-datetime-button>
+          </div>
+      </div>
+
+    </div>
+
+   
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="checkin"   [(ngModel)]="checkinDate" (ngModelChange)="calculateTotalPrice()"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="checkout" [(ngModel)]="checkoutDate" (ngModelChange)="calculateTotalPrice()"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+
+     <!-- Display Total Price -->
+    <div class="total-price">
+      <ion-card >
+        <ion-card-content>
+          <p><strong>Total Price:</strong> ₱ {{ totalPrice | number : '1.2-2' }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    
+    <!-- Total Price -->
+    <!-- <div class="total-price">
+      <p><strong>Total Price:</strong> ₱{{ totalPrice | number : '1.2-2' }}</p>
+    </div> -->
+  </div>
+
+  <!-- Show this if room is not found -->
+  <div *ngIf="!room" class="loading-text">
+    <p>Loading room details...</p>
+  </div>
+</ion-content>
+
+<!-- Footer -->
+<ion-footer class="footer">
+  <ion-toolbar>
+    <div class="footer-buttons">
+      <!-- <ion-button fill="translucent" class="save-btn">
+        Save for later
+      </ion-button> -->
+      <ion-button class="book-btn" (click)="bookRoom()">
+        Book Now
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

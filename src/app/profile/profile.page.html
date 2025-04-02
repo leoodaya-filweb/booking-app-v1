@@ -1,0 +1,45 @@
+<ion-header [translucent]="true"  color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="profile-container" *ngIf="user">
+    <!-- Profile Image -->
+    <div class="profile-img">
+      <ion-avatar>
+        <img src="https://www.gravatar.com/avatar?d=mp" alt="Profile Picture" class="avatar">
+      </ion-avatar>
+    </div>
+
+    <!-- User Details -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ user.name }}</ion-card-title>
+        <ion-card-subtitle>{{ user.username }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>User Type:</strong> User</p>
+        <p><strong>Joined:</strong> {{ user.created_at | date }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="full" color="danger" (click)="logout()">Logout</ion-button>
+   
+  </div>
+
+  <!-- Loading / Error Message -->
+  <!-- <div *ngIf="!user" class="loading-text">
+    <p>Loading profile...</p>
+  </div> -->
+  <!-- Logout Button -->
+ 
+
+  
+</ion-content>

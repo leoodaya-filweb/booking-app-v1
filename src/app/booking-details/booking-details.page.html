@@ -1,0 +1,67 @@
+<ion-header [translucent]="true" color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Booking No. {{bookingDetails.id}} Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<!-- Room Details -->
+<ion-card class="hotel-card" *ngIf="bookingDetails?.room">
+ 
+  <div class="image-wrapper">
+    <img [src]="bookingDetails.room?.image" alt="{{ bookingDetails.room?.name }}" class="room-image"/>
+  </div>
+
+  <ion-card-content>
+    <h2 class="hotel-name">{{ bookingDetails.room?.name }}</h2>
+    <p class="hotel-cost"><ion-icon name="cash-outline"></ion-icon> Cost per Night: ₱ {{ bookingDetails.room?.price | number : '1.2-2' }}</p>
+    <p class="hotel-cost"><ion-icon name="person"></ion-icon>{{bookingDetails.room.bed }} People</p>
+    <p class="hotel-cost"><ion-icon name="moon"></ion-icon> {{bookingDetails.days }} day/s</p>
+
+    <p class="hotel-cost"><ion-icon name="cash-outline"></ion-icon> Total Cost: ₱ {{ bookingDetails.price | number : '1.2-2' }}</p>
+    <p class="hotel-cost">Status: {{ bookingDetails.status === 'Booked' ? 'Active' : (bookingDetails.status | titlecase) }}</p>
+
+  </ion-card-content>
+</ion-card>
+
+<!-- Check-in & Check-out Details -->
+<ion-card class="date-card" *ngIf="bookingDetails">
+  <ion-card-content class="checkin-checkout-container">
+    <div class="checkin">
+      <p class="label">Check-in</p>
+      <p class="date">{{ bookingDetails.checkin | date:'d MMM, y' }}</p>
+      <p class="time">{{ bookingDetails.checkin | date:'h:mm a' }}</p> <!-- Fixed time formatting -->
+    </div>
+    
+    <ion-icon name="arrow-forward-outline"></ion-icon>
+    
+    <div class="checkout">
+      <p class="label">Check-out</p>
+      <p class="date">{{ bookingDetails.checkout | date:'d MMM, y' }}</p>
+      <p class="time">{{ bookingDetails.checkout | date:'h:mm a' }}</p> <!-- Corrected time format -->
+    </div>
+  </ion-card-content>
+</ion-card>
+
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <ion-button expand="block d-none">
+      <ion-icon name="create-outline" slot="start"></ion-icon>
+      Edit Booking Details
+    </ion-button>
+
+    <ion-button expand="block" color="danger" (click)="cancelBooking()" *ngIf="bookingDetails.status === 'Booked'">
+      <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+      Cancel Booking
+    </ion-button>
+  </div>
+
+
+
+ 
+</ion-content>

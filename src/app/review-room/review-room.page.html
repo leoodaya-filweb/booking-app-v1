@@ -1,0 +1,37 @@
+<ion-header [translucent]="true" color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Leave a Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-card class="review-card">
+    <ion-card-header>
+      <ion-card-title class="text-center">Write a Review</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label position="floating">Your Review</ion-label>
+        <ion-textarea [(ngModel)]="reviewText" auto-grow></ion-textarea>
+      </ion-item>
+
+      <div class="rating-container">
+        <p>Rating</p>
+        <div class="stars">
+          <ion-icon 
+            *ngFor="let r of [1, 2, 3, 4, 5]" 
+            [name]="r <= rating ? 'star' : 'star-outline'" 
+            (click)="setRating(r)">
+          </ion-icon>
+        </div>
+      </div>
+
+      <ion-button expand="block" class="modern-button" (click)="submitReview()">Submit Review</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

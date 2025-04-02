@@ -1,0 +1,36 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+form {
+  width: 90%;
+  max-width: 400px;
+}
+
+ion-item {
+  --border-radius: 10px;
+  --background: transparent;
+  margin-bottom: 10px;
+}
+
+ion-button {
+  margin-top: 20px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+
+.register-title {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+
+}

@@ -1,20 +1,192 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page" id="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>BookingApp</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content [fullscreen]="true">
+    <!-- Refresh  -->
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+    <!-- Greeting -->
+    <div class="greetings-wrapper">
+      <div class="d-block">
+          <div  class="greeting"   >
+            <h3>Hello, {{ user | titlecase}} 👋</h3>
+              <!-- User Profile Icon -->
+            <!-- <ion-buttons slot="end">
+              <ion-button (click)="goToProfile()">
+                <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons> -->
+          
+          </div>
+    
+          <p>Welcome back! Ready to book your next room?</p>
+        
+      </div>
+
+         <!-- Search Bar -->
+         <div class="search-container">
+          <ion-searchbar 
+            [(ngModel)]="searchQuery"
+            placeholder="Search for rooms"
+            (keyup.enter)="searchRooms()">
+          </ion-searchbar>
+
+        </div>
+        
+    </div>
+  
+ 
+    <!-- Categories -->
+    <!-- <div class="category-wrapper">
+      <ion-list-header>
+        <h3 class="text-bold">Categories</h3>
+      </ion-list-header>
+      <div class="category-grid">
+        <div class="category-card" (click)="openCategory('single')">
+          <img src="https://th.bing.com/th/id/R.7d6d3f2949e843e94c8b222ccc8a78b8?rik=ClTXhLLbUODrDQ&riu=http%3a%2f%2fhotelhennessis.com%2fwp-content%2fuploads%2f2015%2f12%2fStandard-Single-Room-Hotel-Hennessis-1.jpg&ehk=k1yvbWgeqnsv81LBUNwz3u6KCemfUi9TBjeBC1dK%2fIE%3d&risl=&pid=ImgRaw&r=0" alt="Single Room">
+          <div class="category-text">1 Peson</div>
+        </div>
+        
+        <div class="category-card" (click)="openCategory('double')">
+          <img src="https://th.bing.com/th/id/R.1c659a53f07a4ab5a772eaad8a902037?rik=pbdnRgO5yASnzQ&riu=http%3a%2f%2fwebbox.imgix.net%2fimages%2flpcsudkgpkcuocql%2f4af26335-5f9a-4906-a8cf-a2a537565178.jpg%3fauto%3dformat%2ccompress%26fit%3dcrop%26crop%3dentropy&ehk=9zKe0ecxMTLA1BwrqIiUduRa91r3PNaj1btJxGG0Ub8%3d&risl=&pid=ImgRaw&r=0" alt="Double Room">
+          <div class="category-text">2 Person</div>
+        </div>
+        
+        <div class="category-card" (click)="openCategory('whole')">
+          <img src="https://www.causeway.com.au/static/uploads/images/causeway-353-hotel-deluxe-triple-room-dtr01-wfjxnbgbxuoa.jpg?autorotate=true&mode=max&upscale=true&width=1536" alt="Triple Room">
+          <div class="category-text">3 Person </div>
+        </div>
+      </div>
+    </div> -->
+    
+     <!-- Active Booking Section -->
+    <ion-list-header>
+      <h4 class="text-bold">Active Bookings</h4>
+    </ion-list-header>
+ 
+    <ion-list *ngIf="activeBookings.length > 0">
+    
+    
+      <ion-item *ngFor="let booking of activeBookings" (click)="viewBooking(booking)">
+        <ion-thumbnail slot="start">
+          <img [src]="booking.room.image" alt="Room Image" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ booking.room.name }}</h2>
+          <!-- <p>Start Date: {{ booking.checkin | date:'medium' }}</p> -->
+          <p class="d-flex-gap-2"> <ion-icon name="calendar"></ion-icon> <span> {{ booking.checkout | date:'d MMM, y' }}</span></p>
+          <p>Cost: ₱ {{ booking.price  | number : '1.2-2' }}</p>
+        </ion-label>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-item>
+
+      <!-- <div *ngIf="!(activeBookings.length === 0)" class="see-more" routerLink="/rooms/0/0">
+        <p class="text-center">
+          <ion-note>
+            See more...
+          </ion-note>
+        </p>
+     </div> -->
+    
+    </ion-list>
+    
+    <ion-item *ngIf="activeBookings.length === 0">
+      <ion-label>No active bookings found.</ion-label>
+    </ion-item>
+  
+  
+  
+    <!-- Popular Destinations -->
+    <ion-list >
+      <ion-list-header>
+        <h3 class="text-bold">Most Rented Rooms</h3>
+      </ion-list-header>
+      <div class="grid-container" *ngIf="topRooms.length > 0">
+        <div class="grid-item" *ngFor="let topRoom of topRooms" (click)="viewRoom(topRoom)">
+          <img [src]="topRoom.image_path" alt="{{ topRoom.name }}" class="room-image"/>
+          <div class="room-info">
+            <div class="d-flex">
+              <h3 class="text-bold">{{ topRoom.name }}</h3>
+              <p class="text-bold" color="primary">₱ {{ topRoom.price | number : '1.2-2'}}/night</p>
+            </div>
+            <!-- Star Ratings and Reviews (Left-aligned) -->
+            <div class="rating-container">
+              <div class="stars">
+                <ion-icon *ngFor="let star of getStarsArray(topRoom.average_rating)" [name]="star"></ion-icon>
+              </div>
+              <!-- <span class="review-count">({{topRoom?.reviews ?? 0}})</span> -->
+            </div>
+            <p>{{(topRoom.average_rating | number: '1.1-2') ?? 0}} Ratings ({{topRoom.total_reviews ?? 0}} Reviews)</p>
+
+            <p *ngIf="topRoom.status === 'occupied'" >Status: <span class="status-occupied"> {{ topRoom.status | titlecase}}</span></p>
+            <p *ngIf="topRoom.status === 'Available'" >Status: <span class="status-available"> {{ topRoom.status | titlecase}}</span></p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!(topRooms.length === 0)" class="see-more" routerLink="/rooms/0">
+        <p class="text-center">
+          <ion-note>
+            See more...
+          </ion-note>
+        </p>
+     </div>
+    </ion-list>
+
+    <ion-item *ngIf="topRooms.length === 0">
+      <ion-label>No Top Rooms found.</ion-label>
+    </ion-item>
+
+
+  
+    <!-- Book Now Button -->
+    <!-- <ion-button expand="full" (click)="startBooking()">Book Now</ion-button> -->
+  </ion-content>
+</div>
+
+
+<!-- MENU -->
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content >
+    <ion-menu-toggle>
+      <ion-toolbar>
+        <ion-item lines="full" routerLink="/profile">
+          <ion-label>Account</ion-label>
+          <ion-icon name="person"></ion-icon>
+        </ion-item>
+      </ion-toolbar>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle>
+      <ion-toolbar>
+        <ion-item lines="full" routerLink="/booking">
+          <ion-label>My bookings</ion-label>
+          <ion-icon name="book"></ion-icon>
+        </ion-item>
+      </ion-toolbar>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle>
+      <ion-toolbar>
+        <ion-item lines="full" routerLink="/rooms/0">
+          <ion-label>Rooms</ion-label>
+          <ion-icon name="home"></ion-icon>
+        </ion-item>
+      </ion-toolbar>
+    </ion-menu-toggle>
+   
+    
+  </ion-content>
+</ion-menu>
